@@ -1,0 +1,18 @@
+TO DOWNLOAD parodus2ccsp component SOURCE:
+https://github.com/Comcast/parodus2ccsp
+
+STEPS TO BUILD parodus2ccsp component for YOCTO
+
+1 Create a folder named "parodus2ccsp" under "meta-rdk/recipes-support/" path
+2 Copy the parodus2ccsp_1.0.bb file to the "meta-rdk/recipes-support/parodus2ccsp"
+3 Create another directory named parodus2ccsp under "meta-rdk/recipes-support/parodus2ccsp"
+4 Place the parodus2ccsp_cmake.patch file under "meta-rdk/recipes-support/parodus2ccsp/parodus2ccsp"
+
+To include parodus2ccsp as part of the Image 
+Add parodus2ccsp under RDEPENDS_packagegroup-rdk-oss-broadband in meta-rdk/recipes-core/packagegroups/packagegroup-rdk-ccsp-broadband.bb
+
+To Build the component
+
+bitbake parodus2ccsp
+
+

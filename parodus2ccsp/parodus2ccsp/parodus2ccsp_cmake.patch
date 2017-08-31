@@ -1,0 +1,35 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index f6918e5..237b37c 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -66,6 +66,7 @@ execute_process(
+ 
+ add_definitions("-DWEBPA_GIT_VERSION=\"${GIT_COMMIT_TAG}\"")
+ 
++if (NOT BUILD_YOCTO)
+ # cJSON external dependency
+ #-------------------------------------------------------------------------------
+ ExternalProject_Add(cJSON
+@@ -258,7 +259,7 @@ add_library(libcmocka STATIC SHARED IMPORTED)
+ add_dependencies(libcmocka cmocka)
+ 
+ endif (BUILD_TESTING)
+-
++endif ()
+ link_directories ( ${LIBRARY_DIR} ${COMMON_LIBRARY_DIR} ${LIBRARY_DIR64} )
+ 
+ enable_testing()
+diff --git a/source/broadband/CMakeLists.txt b/source/broadband/CMakeLists.txt
+index 8d6a456..0af9935 100644
+--- a/source/broadband/CMakeLists.txt
++++ b/source/broadband/CMakeLists.txt
+@@ -22,5 +22,7 @@ add_library(${PROJ_BROADBAND}.shared SHARED ${HEADERS} ${SOURCES})
+ set_target_properties(${PROJ_BROADBAND}.shared PROPERTIES OUTPUT_NAME ${PROJ_BROADBAND})
+ target_link_libraries(${PROJ_BROADBAND}.shared ${CMAKE_THREAD_LIBS_INIT})
+ target_link_libraries(${PROJ_BROADBAND}.shared ${COMMON_FLAGS})
+-install (TARGETS ${PROJ_BROADBAND} DESTINATION ${INSTALL_DIR})
+-install (TARGETS ${PROJ_BROADBAND}.shared DESTINATION ${INSTALL_DIR})
++#install (TARGETS ${PROJ_BROADBAND} DESTINATION ${INSTALL_DIR})
++#install (TARGETS ${PROJ_BROADBAND}.shared DESTINATION ${INSTALL_DIR})
++install (TARGETS ${PROJ_BROADBAND} DESTINATION lib)
++install (TARGETS ${PROJ_BROADBAND}.shared DESTINATION lib)
